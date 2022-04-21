@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Presentation.gd" type="Script" id=2]
+[ext_resource path="res://assets/icons/black/left.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/black/right.png" type="Texture" id=4]
+[ext_resource path="res://assets/backgrounds/light_grey.png" type="Texture" id=5]
+[ext_resource path="res://assets/icons/black/home.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 403, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 50, 50 )
+
+[node name="Presentation" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 107.0, 129.0 ]
+}
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.417, 0.417 )
+texture = ExtResource( 5 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Slides" type="Node2D" parent="."]
+
+[node name="ControlsBoundings" type="Area2D" parent="."]
+position = Vector2( 400, 425 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlsBoundings"]
+position = Vector2( -1, -0.5 )
+shape = SubResource( 7 )
+
+[node name="Controls" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Prev" type="Sprite" parent="Controls"]
+position = Vector2( 25, 425 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1000
+texture = ExtResource( 3 )
+
+[node name="PrevArea2D" type="Area2D" parent="Controls/Prev"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controls/Prev/PrevArea2D"]
+shape = SubResource( 4 )
+
+[node name="Home" type="Sprite" parent="Controls"]
+position = Vector2( 400, 425 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="HomeArea2D" type="Area2D" parent="Controls/Home"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controls/Home/HomeArea2D"]
+shape = SubResource( 4 )
+
+[node name="Next" type="Sprite" parent="Controls"]
+position = Vector2( 775, 425 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="NextArea2D" type="Area2D" parent="Controls/Next"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Controls/Next/NextArea2D"]
+shape = SubResource( 4 )
+
+[connection signal="mouse_entered" from="ControlsBoundings" to="." method="_on_Boundings_mouse_entered"]
+[connection signal="mouse_exited" from="ControlsBoundings" to="." method="_on_Boundings_mouse_exited"]
+[connection signal="input_event" from="Controls/Prev/PrevArea2D" to="." method="_on_PrevArea2D_input_event"]
+[connection signal="mouse_entered" from="Controls/Prev/PrevArea2D" to="." method="_on_PrevArea2D_mouse_entered"]
+[connection signal="mouse_exited" from="Controls/Prev/PrevArea2D" to="." method="_on_PrevArea2D_mouse_exited"]
+[connection signal="input_event" from="Controls/Home/HomeArea2D" to="." method="_on_HomeArea2D_input_event"]
+[connection signal="mouse_entered" from="Controls/Home/HomeArea2D" to="." method="_on_HomeArea2D_mouse_entered"]
+[connection signal="mouse_exited" from="Controls/Home/HomeArea2D" to="." method="_on_HomeArea2D_mouse_exited"]
+[connection signal="input_event" from="Controls/Next/NextArea2D" to="." method="_on_NextArea2D_input_event"]
+[connection signal="mouse_entered" from="Controls/Next/NextArea2D" to="." method="_on_NextArea2D_mouse_entered"]
+[connection signal="mouse_exited" from="Controls/Next/NextArea2D" to="." method="_on_NextArea2D_mouse_exited"]
